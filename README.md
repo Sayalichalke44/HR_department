@@ -193,6 +193,6 @@ urlpatterns = [
 
 ## Author  
 
-Developed by **[Your Name]**.  
+Developed by **sayali chalke.**  
 
-For any queries, please contact at **your.email@example.com**.  
+For any queries, please contact at **chalkesayali@614gmail.com.**  
