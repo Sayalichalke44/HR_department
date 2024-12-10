@@ -107,17 +107,19 @@
         <h1>Update Department</h1>
         <form action="" method="POST">
             {% csrf_token %}
+            {% for department in dept %}
             <div class="form-row">
                 <label for="dept_name">Department Name:</label>
-                <input type="text" id="dept_name" name="dept_name" value="{{ department.dept_name }}" placeholder="Enter department name">
+                <input type="text" id="dept_name" name="dept_name" value="{{ department.dept_name }}">
             </div>
             <div class="form-row">
                 <label for="description">Department Description:</label>
-                <input type="text" id="description" name="description" value="{{ department.description }}" placeholder="Enter department description">
+                <input type="text" id="description" name="description" value="{{ department.description }}">
             </div>
             <div class="form-row">
                 <input type="submit" value="Update">
             </div>
+            {% endfor %}
         </form>
     </div>
 </body>
