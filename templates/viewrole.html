@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Department List{% endblock %}
+
+{% block content %}
+
+    <h1>Roles List</h1>
+    <button><a href="/addrole">Create Role</a></button>
+
+    <table>
+        <tr>
+            <th>Sr.No</th>
+            <th>Role Name</th>
+            <th>Description</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+        {% for role in roles %}
+        <tr>
+            <td>{{ role.role_id }}</td>
+            <td>{{ role.role_name }}</td>
+            <td>{{ role.description }}</td>
+            <td class="action-links"><a href="updaterole/{{ role.role_id }}">Edit</a></td>
+            <td class="action-links"><a href="deleterole/{{ role.role_id }}" onclick="return confirm('Are you sure?');">Delete</a></td>
+        
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

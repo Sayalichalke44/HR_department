@@ -1,0 +1,27 @@
+
+
+{% extends "base.html" %}
+
+{% block title %}Update Role{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>Update Role</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="role_name">Role Name:</label>
+            <input type="text" id="role_name" name="role_name" value="{{ role.role_name }}" placeholder="Enter role name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Role Description:</label>
+            <textarea id="description" name="description" rows="4" placeholder="Enter role description" required>{{ role.description }}</textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit">Update</button>
+        </div>
+    </form>
+</div>
+{% endblock %}
