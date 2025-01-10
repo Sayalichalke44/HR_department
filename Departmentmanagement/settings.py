@@ -84,7 +84,7 @@ WSGI_APPLICATION = 'Departmentmanagement.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Department',
+        'NAME': 'management_system',
         'HOST':'localhost',
         'USER':'root',
         'PASSWORD':'mysql', #'' or''  for XAMPP
@@ -136,3 +136,13 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTH_USER_MODEL = 'Department.Users'
+
+#GMAIL settings
+EMAIL_BACKEND="django.core.mail.backends.smtp.EmailBackend"
+EMAIL_PORT="587"
+EMAIL_HOST="smtp.gmail.com"
+EMAIL_HOST_USER="sayalichalke1104@gmail.com"
+EMAIL_HOST_PASSWORD="cljk waeu mkvn sljs"
+EMAIL_USE_TLS=True

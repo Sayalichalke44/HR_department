@@ -1,0 +1,183 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Employee{% endblock %}
+
+{% block content %}
+    <div class="form-container">
+        <h1>Add Employee</h1>
+
+        {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                    <li class="{{ message.tags }}">{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        <form method="POST" action="/addemployee/">
+            {% csrf_token %}
+            
+            <div class="form-group">
+                <label for="first_name"><strong>First Name:</strong></label>
+                <input type="text" id="first_name" name="first_name" value="{{ form_data.first_name|default:'' }}" required placeholder="Enter first name">
+            </div>
+
+            <div class="form-group">
+                <label for="last_name"><strong>Last Name:</strong></label>
+                <input type="text" id="last_name" name="last_name" value="{{ form_data.last_name|default:'' }}" required placeholder="Enter last name">
+            </div>
+
+            <div class="form-group">
+                <label for="email"><strong>Email:</strong></label>
+                <input type="email" id="email" name="email" value="{{ form_data.email|default:'' }}" required placeholder="Enter email">
+            </div>
+
+            <div class="form-group">
+                <label for="mobile"><strong>Mobile:</strong></label>
+                <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" value="{{ form_data.mobile|default:'' }}" required placeholder="Enter mobile number">
+            </div>
+
+            <div class="form-group">
+                <label for="role"><strong>Select Role:</strong></label>
+                <select id="role" name="role" required>
+                    <option value="">-- Select Role --</option>
+                    {% for role in roles %}
+                    <option value="{{ role.role_id }}" {% if role.role_id == form_data.role_id %}selected{% endif %}>{{ role.role_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="department"><strong>Select Department:</strong></label>
+                <select id="department" name="department" required>
+                    <option value="">-- Select Department --</option>
+                    {% for department in departments %}
+                    <option value="{{ department.dept_id }}" {% if department.dept_id == form_data.department_id %}selected{% endif %}>{{ department.dept_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="reporting_manager"><strong>Allocate Reporting Manager:</strong></label>
+                <select id="reporting_manager" name="reporting_manager">
+                    <option value="">-- Select Reporting Manager --</option>
+                    {% for user in users %}
+                    <option value="{{ user.id }}" {% if user.id == form_data.reporting_manager_id %}selected{% endif %}>{{ user.username }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="date_of_joining"><strong>Date of Joining:</strong></label>
+                <input type="date" id="date_of_joining" name="date_of_joining" value="{{ form_data.date_of_joining|default:'' }}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="username"><strong>Username:</strong></label>
+                <input type="text" id="username" name="username" 
+                       value="{{ form_data.username|default:'' }}" 
+                       class="{% if username_error %}error-field{% endif %}" 
+                       required placeholder="Enter username">
+            </div>
+
+            <div class="form-group">
+                <label for="password"><strong>Password:</strong></label>
+                <input type="password" id="password" name="password" required placeholder="Enter password">
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="submit-btn">Add Employee</button>
+            </div>
+        </form>
+    </div>
+
+    <style>
+        .form-container {
+            border: 2px solid #4a90e2;
+            border-radius: 10px;
+            padding: 20px;
+            background-color: #ffffff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 600px;
+            margin: auto;
+        }
+
+        .form-container h1 {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            width: 200px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        input, select {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        button.submit-btn {
+            background-color: #4a90e2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s;
+        }
+
+        button.submit-btn:hover {
+            background-color: #357ab7;
+        }
+
+        .messages {
+            margin-bottom: 20px;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .messages .error {
+            color: red;
+            font-weight: bold;
+        }
+
+        .error-field {
+            border: 2px solid red;
+            background-color: #ffe6e6;
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                width: 90%;
+            }
+
+            .form-group {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            label {
+                width: auto;
+                margin-bottom: 5px;
+            }
+
+            input, select {
+                width: 100%;
+            }
+        }
+    </style>
+{% endblock %}
